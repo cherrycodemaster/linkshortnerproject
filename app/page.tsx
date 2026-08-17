@@ -1,7 +1,61 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import Image from "next/image";
+import { SignUpButton } from "@clerk/nextjs";
+import {
+  Link2,
+  BarChart2,
+  Shield,
+  Zap,
+  Globe,
+  Copy,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+
+const features = [
+  {
+    icon: Link2,
+    title: "Instant Short Links",
+    description:
+      "Turn any long URL into a clean, shareable short link in seconds.",
+  },
+  {
+    icon: BarChart2,
+    title: "Click Analytics",
+    description:
+      "Track how many times each link has been clicked from your dashboard.",
+  },
+  {
+    icon: Shield,
+    title: "Secure & Reliable",
+    description:
+      "All links are stored safely and resolve reliably every time.",
+  },
+  {
+    icon: Zap,
+    title: "Lightning Fast",
+    description:
+      "Redirects happen in milliseconds so your audience never has to wait.",
+  },
+  {
+    icon: Globe,
+    title: "Share Anywhere",
+    description:
+      "Use your short links in emails, social posts, QR codes, or docs.",
+  },
+  {
+    icon: Copy,
+    title: "One-Click Copy",
+    description:
+      "Copy your new short URL to the clipboard instantly from the dashboard.",
+  },
+];
 
 export default async function Home() {
   const { userId } = await auth();
@@ -11,83 +65,67 @@ export default async function Home() {
   }
 
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <div className="flex w-full items-center justify-between">
-          <Image
-            className="dark:invert h-5 w-[100px]"
-            src="/next.svg"
-            alt="Next.js logo"
-            width={100}
-            height={20}
-            priority
-          />
+    <div className="flex flex-col flex-1">
+      {/* Hero */}
+      <section className="flex flex-col items-center gap-6 px-6 py-24 text-center">
+        <Badge variant="secondary" className="text-sm">
+          Free to get started
+        </Badge>
+        <h1 className="max-w-2xl text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+          Shorten links.
+          <br />
+          <span className="text-primary">Track every click.</span>
+        </h1>
+        <p className="max-w-xl text-lg text-muted-foreground">
+          Link Shortener turns unwieldy URLs into tidy, shareable links — and
+          gives you real-time analytics to see exactly how they perform.
+        </p>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <SignUpButton mode="modal">
+            <Button size="lg" className="px-8">
+              Get started for free
+            </Button>
+          </SignUpButton>
         </div>
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+      </section>
+
+      {/* Features */}
+      <section className="bg-muted/40 px-6 py-20">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="mb-12 text-center text-3xl font-semibold tracking-tight">
+            Everything you need to manage links
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {features.map(({ icon: Icon, title, description }) => (
+              <Card key={title}>
+                <CardHeader>
+                  <div className="mb-2 flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Icon className="size-5" />
+                  </div>
+                  <CardTitle>{title}</CardTitle>
+                  <CardDescription>{description}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <Button
-            className="h-12 w-full rounded-full px-5 md:w-[158px]"
-            nativeButton={false}
-            render={
-              // eslint-disable-next-line jsx-a11y/anchor-has-content -- content comes from Button's children via the render prop
-              <a
-                href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              />
-            }
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
+      </section>
+
+      {/* CTA */}
+      <section className="flex flex-col items-center gap-6 px-6 py-24 text-center">
+        <h2 className="text-3xl font-semibold tracking-tight">
+          Ready to shorten your first link?
+        </h2>
+        <p className="max-w-md text-muted-foreground">
+          Create a free account and start building your link library in under a
+          minute.
+        </p>
+        <SignUpButton mode="modal">
+          <Button size="lg" className="px-8">
+            Sign up — it&apos;s free
           </Button>
-          <Button
-            variant="outline"
-            className="h-12 w-full rounded-full px-5 md:w-[158px]"
-            nativeButton={false}
-            render={
-              // eslint-disable-next-line jsx-a11y/anchor-has-content -- content comes from Button's children via the render prop
-              <a
-                href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              />
-            }
-          >
-            Documentation
-          </Button>
-        </div>
-      </main>
+        </SignUpButton>
+      </section>
     </div>
   );
 }
