@@ -3,6 +3,7 @@ import { shadcn } from "@clerk/ui/themes";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/header";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ClerkProvider appearance={{ theme: shadcn }}>
           <Header />
           {children}
+          <Toaster position="bottom-right" duration={3000} closeButton />
         </ClerkProvider>
       </body>
     </html>

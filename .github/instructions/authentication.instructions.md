@@ -1,3 +1,7 @@
+---
+description: Read this before impelmenting or modifying authentication in this project.
+---
+
 # Authentication
 
 All authentication in this app is handled by **Clerk**
