@@ -34,7 +34,6 @@ etc.).
   in automatically by `auth.protect()`; never render protected content
   without this check.
 
-
 ## Home page redirect
 
 - `app/page.tsx` must check the current session server-side (`auth()`

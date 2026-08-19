@@ -52,18 +52,14 @@ export function Header() {
           <SignInButton mode="modal">
             <Button
               variant="outline"
-              onClick={() =>
-                sessionStorage.setItem(AUTH_INTENT_KEY, "sign-in")
-              }
+              onClick={() => sessionStorage.setItem(AUTH_INTENT_KEY, "sign-in")}
             >
               Sign In
             </Button>
           </SignInButton>
           <SignUpButton mode="modal">
             <Button
-              onClick={() =>
-                sessionStorage.setItem(AUTH_INTENT_KEY, "sign-up")
-              }
+              onClick={() => sessionStorage.setItem(AUTH_INTENT_KEY, "sign-up")}
             >
               Sign Up
             </Button>

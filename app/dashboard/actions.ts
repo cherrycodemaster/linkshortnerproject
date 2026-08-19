@@ -10,10 +10,7 @@ const createLinkSchema = z.object({
   shortCode: z
     .string()
     .trim()
-    .regex(
-      /^[a-zA-Z0-9-_]+$/,
-      "Only letters, numbers, - and _ are allowed",
-    )
+    .regex(/^[a-zA-Z0-9-_]+$/, "Only letters, numbers, - and _ are allowed")
     .min(3, "Must be at least 3 characters")
     .max(30, "Must be at most 30 characters")
     .optional(),
@@ -50,10 +47,7 @@ const updateLinkSchema = z.object({
   shortCode: z
     .string()
     .trim()
-    .regex(
-      /^[a-zA-Z0-9-_]+$/,
-      "Only letters, numbers, - and _ are allowed",
-    )
+    .regex(/^[a-zA-Z0-9-_]+$/, "Only letters, numbers, - and _ are allowed")
     .min(3, "Must be at least 3 characters")
     .max(30, "Must be at most 30 characters"),
 });

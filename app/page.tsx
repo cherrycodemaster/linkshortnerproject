@@ -1,14 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { SignUpButton } from "@clerk/nextjs";
-import {
-  Link2,
-  BarChart2,
-  Shield,
-  Zap,
-  Globe,
-  Copy,
-} from "lucide-react";
+import { Link2, Shield, Zap, Globe, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -26,16 +19,9 @@ const features = [
       "Turn any long URL into a clean, shareable short link in seconds.",
   },
   {
-    icon: BarChart2,
-    title: "Click Analytics",
-    description:
-      "Track how many times each link has been clicked from your dashboard.",
-  },
-  {
     icon: Shield,
     title: "Secure & Reliable",
-    description:
-      "All links are stored safely and resolve reliably every time.",
+    description: "All links are stored safely and resolve reliably every time.",
   },
   {
     icon: Zap,
@@ -74,11 +60,11 @@ export default async function Home() {
         <h1 className="max-w-2xl text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
           Shorten links.
           <br />
-          <span className="text-primary">Track every click.</span>
+          <span className="text-primary">Share them anywhere.</span>
         </h1>
         <p className="max-w-xl text-lg text-muted-foreground">
-          Link Shortener turns unwieldy URLs into tidy, shareable links — and
-          gives you real-time analytics to see exactly how they perform.
+          Link Shortener turns unwieldy URLs into tidy, shareable links in
+          seconds.
         </p>
         <div className="flex flex-col gap-3 sm:flex-row">
           <SignUpButton mode="modal">

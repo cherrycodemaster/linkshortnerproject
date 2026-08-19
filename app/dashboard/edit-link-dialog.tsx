@@ -81,9 +81,7 @@ export function EditLinkDialog({ link }: EditLinkDialogProps) {
 
           <div className="flex flex-col gap-4 py-4">
             <div className="flex flex-col gap-2">
-              <Label htmlFor={`originalUrl-${link.id}`}>
-                Destination URL
-              </Label>
+              <Label htmlFor={`originalUrl-${link.id}`}>Destination URL</Label>
               <Input
                 id={`originalUrl-${link.id}`}
                 type="url"
