@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "cat > tmp/$(date +%s).json",
+        "powershell": "$input | Set-Content -Path \"tmp/$([DateTimeOffset]::UtcNow.ToUnixTimeSeconds()).json\""
+      }
+    ]
+  }
+}

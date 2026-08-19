@@ -4,7 +4,7 @@
     "postToolUse": [
       {
         "type": "command",
-        "bash": "npx prettier --write ."
+        "bash": ".github/hooks/scripts/format-on-edit.sh"
       }
     ]
   }
