@@ -4,9 +4,24 @@ import { z } from "zod";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { createLink, deleteLink, updateLink } from "@/data/links";
+import { checkRateLimit } from "@/lib/rate-limit";
+
+const MUTATION_RATE_LIMIT = 30;
+const MUTATION_RATE_LIMIT_WINDOW_MS = 60_000;
+
+function rateLimitUserMutations(userId: string) {
+  return checkRateLimit(
+    `link-mutations:${userId}`,
+    MUTATION_RATE_LIMIT,
+    MUTATION_RATE_LIMIT_WINDOW_MS,
+  );
+}
 
 const createLinkSchema = z.object({
-  originalUrl: z.url("Enter a valid URL"),
+  originalUrl: z.url({
+    protocol: /^https?$/,
+    error: "Enter a valid HTTP(S) URL",
+  }).max(2048, "URL must be at most 2048 characters"),
   shortCode: z
     .string()
     .trim()
@@ -22,6 +37,10 @@ export async function createLinkAction(input: CreateLinkInput) {
   const { userId } = await auth.protect();
   if (!userId) {
     return { error: "Not authenticated" };
+  }
+
+  if (!rateLimitUserMutations(userId).allowed) {
+    return { error: "Too many requests. Please try again shortly.", status: 429 };
   }
 
   const result = createLinkSchema.safeParse(input);
@@ -43,7 +62,10 @@ export async function createLinkAction(input: CreateLinkInput) {
 
 const updateLinkSchema = z.object({
   id: z.number().int().positive(),
-  originalUrl: z.url("Enter a valid URL"),
+  originalUrl: z.url({
+    protocol: /^https?$/,
+    error: "Enter a valid HTTP(S) URL",
+  }).max(2048, "URL must be at most 2048 characters"),
   shortCode: z
     .string()
     .trim()
@@ -58,6 +80,10 @@ export async function updateLinkAction(input: UpdateLinkInput) {
   const { userId } = await auth.protect();
   if (!userId) {
     return { error: "Not authenticated" };
+  }
+
+  if (!rateLimitUserMutations(userId).allowed) {
+    return { error: "Too many requests. Please try again shortly.", status: 429 };
   }
 
   const result = updateLinkSchema.safeParse(input);
@@ -91,6 +117,10 @@ export async function deleteLinkAction(input: DeleteLinkInput) {
   const { userId } = await auth.protect();
   if (!userId) {
     return { error: "Not authenticated" };
+  }
+
+  if (!rateLimitUserMutations(userId).allowed) {
+    return { error: "Too many requests. Please try again shortly.", status: 429 };
   }
 
   const result = deleteLinkSchema.safeParse(input);
