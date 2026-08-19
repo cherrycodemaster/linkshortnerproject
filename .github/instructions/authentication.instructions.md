@@ -1,3 +1,7 @@
+---
+description: Read this before impelmenting or modifying authentication in this project.
+---
+
 # Authentication
 
 All authentication in this app is handled by **Clerk**
@@ -29,7 +33,6 @@ etc.).
 - An unauthenticated user hitting a protected page is redirected to sign
   in automatically by `auth.protect()`; never render protected content
   without this check.
-
 
 ## Home page redirect
 

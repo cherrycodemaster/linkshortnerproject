@@ -1,0 +1,17 @@
+{
+  "skill_name": "link-creation-monthly-chart",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a PNG chart showing how many short links were created in each of the last 12 months.",
+      "expected_output": "A PNG bar chart based on links.created_at, with all 12 months represented.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Use the database configured in .env to export monthly link creation counts for the last year to reports/monthly-links.png.",
+      "expected_output": "A PNG at reports/monthly-links.png from a read-only database query.",
+      "files": []
+    }
+  ]
+}

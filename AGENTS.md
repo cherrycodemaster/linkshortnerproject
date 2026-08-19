@@ -12,17 +12,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 This is a link shortener built on Next.js 16 (App Router), Clerk auth, and a
 Drizzle/Neon Postgres database. Detailed, topic-specific coding standards
-live in [`/docs`](./docs).
-
-**It is incredibly important that you ALWAYS read the relevant individual
-instructions file(s) below in full BEFORE generating ANY code.** Do not rely
-on memory or summaries of these files from earlier in the conversation —
-re-read the file whenever it applies to the change you're about to make:
-
-- [Authentication](./docs/auth.md) — Clerk usage, protected routes, and
-  modal sign-in/sign-up rules.
-- [UI Components](./docs/ui.md) — shadcn/ui usage rules; no custom
-  components.
+live in [`.github/instructions`](./.github/instructions) and are applied
+automatically based on each file's `applyTo` pattern.
 
 General rules for all changes:
 
